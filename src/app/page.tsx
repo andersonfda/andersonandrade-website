@@ -116,18 +116,16 @@ function Hero() {
         </p>
       </div>
 
-      {/* Right side portrait */}
-      <div className="absolute right-0 top-0 h-full w-[45%] max-md:w-[40%] max-sm:hidden">
+      {/* Right side portrait — transparent PNG, no background */}
+      <div className="absolute bottom-0 right-4 h-[75%] w-[35%] max-md:w-[32%] max-sm:hidden md:right-8 lg:right-16">
         <Image
           src="/anderson.png"
           alt="Anderson Andrade"
           fill
-          className="object-cover object-top"
+          className="object-contain object-bottom"
           priority
-          sizes="(max-width: 640px) 0vw, 45vw"
+          sizes="(max-width: 640px) 0vw, 35vw"
         />
-        {/* Soft left-edge fade into background */}
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-bg to-transparent" />
       </div>
     </section>
   );
