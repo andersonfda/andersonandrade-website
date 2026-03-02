@@ -29,6 +29,147 @@ body {
   color: var(--color-bg);
 }
 
+/* ─── Desaturated editorial photos ─── */
+
+.photo-editorial {
+  filter: grayscale(0.55) contrast(1.05) brightness(1.02);
+  transition: filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.photo-editorial:hover {
+  filter: grayscale(0.3) contrast(1.02) brightness(1.0);
+}
+
+/* ─── Scroll reveal animations ─── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Hero entrance animations ─── */
+
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes hero-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes hero-line-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.hero-name {
+  animation: hero-fade-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+.hero-tagline {
+  animation: hero-fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+
+.hero-stats {
+  animation: hero-fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.hero-label {
+  animation: hero-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+.hero-photo {
+  animation: hero-slide-in-right 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.hero-line {
+  transform-origin: left;
+  animation: hero-line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) 1s both;
+}
+
+/* ─── Nav entrance ─── */
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-animate {
+  animation: nav-drop 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+/* ─── Smooth link underline animation ─── */
+
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─── Reduced motion ─── */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -39,6 +180,11 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  .reveal,
+  .reveal-item {
+    opacity: 1;
+    transform: none;
   }
 }
 
