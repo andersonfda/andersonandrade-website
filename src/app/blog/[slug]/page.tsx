@@ -12,8 +12,6 @@ export function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // Next.js 16 passes params as a promise in generateMetadata
-  // We use a sync workaround via the function signature
   return params.then(({ slug }) => {
     const post = getPostBySlug(slug);
     return {
@@ -34,7 +32,7 @@ export default async function BlogPost({
   return (
     <>
       {/* Nav */}
-      <nav className="border-b border-border bg-bg">
+      <nav className="nav-animate border-b border-border bg-bg">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
           <Link
             href="/"
@@ -44,7 +42,7 @@ export default async function BlogPost({
           </Link>
           <Link
             href="/blog"
-            className="text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary"
+            className="link-underline text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary"
           >
             &larr; Back to blog
           </Link>
@@ -53,7 +51,7 @@ export default async function BlogPost({
 
       <article className="mx-auto max-w-[680px] px-6 py-20">
         <header className="mb-16">
-          <div className="mb-6 flex items-center gap-4">
+          <div className="page-enter mb-6 flex items-center gap-4">
             <time className="text-[13px] font-normal text-muted">
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "long",
@@ -65,13 +63,23 @@ export default async function BlogPost({
               {post.readingTime}
             </span>
           </div>
-          <h1 className="text-[clamp(30px,5vw,44px)] font-light leading-[1.15] tracking-tight text-primary">
+          <h1 className="page-enter-delay-1 text-[clamp(30px,5vw,44px)] font-light leading-[1.15] tracking-tight text-primary">
             {post.title}
           </h1>
+          <div className="page-enter-delay-2 hero-line mt-8 h-px w-16 bg-primary/30" />
         </header>
 
-        <div className="prose-editorial">
+        <div className="page-enter-delay-3 prose-editorial">
           <MDXRemote source={post.content} />
+        </div>
+
+        <div className="page-enter-delay-4 mt-20 border-t border-border pt-8">
+          <Link
+            href="/blog"
+            className="link-underline text-[14px] font-normal text-secondary transition-colors duration-200 hover:text-primary"
+          >
+            &larr; All posts
+          </Link>
         </div>
       </article>
     </>

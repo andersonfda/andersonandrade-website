@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
+import { RevealStagger } from "@/components/reveal";
 
 export const metadata = {
   title: "Blog — Anderson Andrade",
@@ -12,7 +13,7 @@ export default function BlogPage() {
   return (
     <>
       {/* Nav */}
-      <nav className="border-b border-border bg-bg">
+      <nav className="nav-animate border-b border-border bg-bg">
         <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-5 md:px-10">
           <Link
             href="/"
@@ -23,7 +24,7 @@ export default function BlogPage() {
           <div className="flex items-center gap-10">
             <Link
               href="/#about"
-              className="hidden text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
+              className="link-underline hidden text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
             >
               About
             </Link>
@@ -35,7 +36,7 @@ export default function BlogPage() {
             </Link>
             <Link
               href="/#projects"
-              className="hidden text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
+              className="link-underline hidden text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
             >
               Projects
             </Link>
@@ -44,25 +45,27 @@ export default function BlogPage() {
       </nav>
 
       <main className="mx-auto max-w-[1100px] px-6 py-20 md:px-10">
-        <div className="mb-16 flex items-center gap-2">
+        <div className="page-enter mb-16 flex items-center gap-2">
           <span className="inline-block h-[5px] w-[5px] rounded-full bg-primary" />
           <span className="text-[12px] font-normal tracking-wide text-secondary">
             Blog
           </span>
         </div>
 
-        <h1 className="mb-20 text-[clamp(36px,6vw,56px)] font-extralight leading-[1.05] tracking-tight text-primary">
+        <h1 className="page-enter-delay-1 mb-4 text-[clamp(36px,6vw,56px)] font-extralight leading-[1.05] tracking-tight text-primary">
           Writing
         </h1>
 
-        <div className="flex flex-col">
+        <div className="page-enter-delay-2 hero-line mb-20 h-px w-16 bg-primary/30" />
+
+        <RevealStagger className="flex flex-col" stagger={100}>
           {posts.map((post, i) => {
             const isLast = i === posts.length - 1;
             return (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className={`group grid grid-cols-1 gap-4 border-t border-border py-10 transition-colors duration-200 hover:bg-surface/50 md:grid-cols-[140px_1fr_auto] md:items-start md:gap-10 ${isLast ? "border-b" : ""}`}
+                className={`reveal-item group grid grid-cols-1 gap-4 border-t border-border py-10 transition-all duration-300 hover:bg-surface/50 hover:pl-4 md:grid-cols-[140px_1fr_auto] md:items-start md:gap-10 ${isLast ? "border-b" : ""}`}
               >
                 <div className="flex items-center gap-4 md:flex-col md:items-start md:gap-1">
                   <time className="text-[13px] font-normal text-muted">
@@ -86,13 +89,13 @@ export default function BlogPage() {
                   </p>
                 </div>
 
-                <span className="hidden text-[13px] font-normal text-muted transition-colors duration-200 group-hover:text-primary md:block">
+                <span className="hidden text-[13px] font-normal text-muted transition-all duration-300 group-hover:translate-x-1 group-hover:text-primary md:block">
                   Read &rarr;
                 </span>
               </Link>
             );
           })}
-        </div>
+        </RevealStagger>
       </main>
     </>
   );

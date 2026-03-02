@@ -157,7 +157,7 @@ function About() {
           <div>
             {/* Portrait — desaturated editorial crop */}
             <Reveal delay={100}>
-              <div className="relative mb-12 h-[360px] w-full overflow-hidden rounded-2xl bg-surface md:h-[420px]">
+              <div className="relative mb-12 h-[360px] w-full overflow-hidden rounded-2xl md:h-[420px]">
                 <Image
                   src="/anderson3.png"
                   alt="Anderson Andrade"
