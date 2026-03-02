@@ -47,10 +47,7 @@ function Nav() {
           href="mailto:andersonfda@gmail.com"
           className="hidden cursor-pointer text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
         >
-          andersonfda@gmail.com{" "}
-          <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">
-            &nearr;
-          </span>
+          andersonfda@gmail.com
         </a>
 
         {/* Mobile menu button */}
@@ -154,6 +151,17 @@ function About() {
 
         <div className="grid gap-16 lg:grid-cols-[1fr_340px]">
           <div>
+            {/* Portrait — centered crop of upper body/face */}
+            <div className="relative mb-12 h-[360px] w-full overflow-hidden rounded-2xl bg-surface md:h-[420px]">
+              <Image
+                src="/anderson2.png"
+                alt="Anderson Andrade"
+                fill
+                className="object-cover object-[center_15%]"
+                sizes="(max-width: 1024px) 100vw, 700px"
+              />
+            </div>
+
             <h2 className="mb-10 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
               Engineering the future of
               <br />
@@ -267,8 +275,8 @@ function Projects() {
                   <h3 className="mb-2 text-[20px] font-normal text-primary md:text-[22px]">
                     {project.title}
                     {project.url && (
-                      <span className="ml-2 inline-block text-secondary transition-transform duration-200 group-hover:translate-x-0.5">
-                        &nearr;
+                      <span className="ml-2 inline-block text-secondary">
+                        &rarr;
                       </span>
                     )}
                   </h3>
@@ -335,6 +343,8 @@ const socials = {
 };
 
 function Connect() {
+  const allLinks = [...socials.tier1, ...socials.tier2, ...socials.tier3];
+
   return (
     <section id="connect" className="px-6 py-28 md:px-10">
       <div className="mx-auto max-w-[1100px]">
@@ -343,65 +353,25 @@ function Connect() {
           Find me online
         </h2>
 
-        {/* Tier 1 — prominent */}
-        <div className="mb-12 grid grid-cols-2 gap-x-8 gap-y-5 sm:grid-cols-3 md:grid-cols-5">
-          {socials.tier1.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group cursor-pointer"
-            >
-              <span className="text-[17px] font-light text-primary transition-colors duration-200 group-hover:text-secondary">
-                {link.name}
-              </span>
-              <span className="ml-1 inline-block text-[13px] text-muted transition-transform duration-200 group-hover:translate-x-0.5">
-                &nearr;
-              </span>
-            </a>
+        <ul className="flex flex-col">
+          {allLinks.map((link, i) => (
+            <li key={link.name} className={`border-t border-border ${i === allLinks.length - 1 ? "border-b" : ""}`}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex cursor-pointer items-center justify-between py-5 transition-colors duration-200 hover:bg-surface/50"
+              >
+                <span className="text-[16px] font-normal text-primary">
+                  {link.name}
+                </span>
+                <span className="text-[13px] font-normal text-muted transition-colors duration-200 group-hover:text-secondary">
+                  {link.url.replace(/^https?:\/\//, "")}
+                </span>
+              </a>
+            </li>
           ))}
-        </div>
-
-        {/* Tier 2 */}
-        <div className="mb-8 flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-8">
-          {socials.tier2.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group cursor-pointer"
-            >
-              <span className="text-[14px] font-normal text-secondary transition-colors duration-200 group-hover:text-primary">
-                {link.name}
-              </span>
-              <span className="ml-1 inline-block text-[12px] text-muted transition-transform duration-200 group-hover:translate-x-0.5">
-                &nearr;
-              </span>
-            </a>
-          ))}
-        </div>
-
-        {/* Tier 3 */}
-        <div className="flex flex-wrap gap-x-8 gap-y-4 border-t border-border pt-8">
-          {socials.tier3.map((link) => (
-            <a
-              key={link.name}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group cursor-pointer"
-            >
-              <span className="text-[13px] font-normal text-muted transition-colors duration-200 group-hover:text-secondary">
-                {link.name}
-              </span>
-              <span className="ml-1 inline-block text-[11px] text-muted transition-transform duration-200 group-hover:translate-x-0.5">
-                &nearr;
-              </span>
-            </a>
-          ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
