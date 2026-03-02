@@ -1,0 +1,14 @@
+---
+title: "The State of Autonomous Agent Protocols in 2025"
+date: "2025-03-01"
+excerpt: "A breakdown of where autonomous AI agents stand today — architectures, limitations, and what's actually shipping in production."
+tags: ["AI", "Agents"]
+---
+
+The discourse around autonomous AI agents has shifted dramatically over the past year. We've moved from demos and proofs-of-concept to real production deployments — and with that transition came a reckoning with what actually works versus what looks impressive in a controlled environment. The gap between a compelling agent demo and a reliable autonomous system is, it turns out, enormous.
+
+The dominant architectures today — ReAct (Reasoning + Acting) and Plan-and-Execute — have proven their value but also exposed clear limitations. ReAct agents work well for short-horizon tasks where the action space is constrained and feedback is immediate. But they struggle with long-horizon planning, often getting stuck in loops or losing track of their original objective after a few tool calls. Plan-and-Execute architectures handle complexity better by separating the planning phase from execution, but they're brittle when the environment changes mid-execution. The plan becomes stale, and the agent either plows ahead with an outdated strategy or fails to adapt.
+
+What I've found most promising in production is a hybrid approach: agents that maintain a dynamic task graph rather than a linear plan. The graph gets rebalanced as new information arrives, with each node representing a subtask that can be independently retried or rerouted. This is closer to how complex systems actually operate — not as rigid pipelines but as adaptive networks. The overhead of maintaining this structure is non-trivial, but the reliability gains in multi-step workflows have been significant.
+
+The biggest unsolved challenge remains evaluation. How do you measure whether an autonomous agent is performing well over time? Traditional metrics like task completion rate miss the nuance — an agent can complete a task but take a catastrophically inefficient path, or it can fail on a task that was fundamentally ambiguous. Building robust evaluation frameworks for agents that operate in open-ended environments is, I believe, the bottleneck that will determine which teams ship real products and which remain stuck in prototype mode.

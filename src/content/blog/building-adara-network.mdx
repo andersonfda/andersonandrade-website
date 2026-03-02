@@ -1,0 +1,14 @@
+---
+title: "Building adara.network: Lessons from a DeFi Protocol Launch"
+date: "2025-01-20"
+excerpt: "What we learned building adara.network from scratch — architecture decisions, mistakes made, and what we'd do differently."
+tags: ["DeFi", "Building"]
+---
+
+When we started building adara.network, we made every classic mistake in the DeFi playbook — and a few novel ones. The most important lesson came early: the architecture decisions you make in the first month will constrain everything you build for the next two years. We initially designed for flexibility, abstracting everything behind generic interfaces so we could "swap out components later." In practice, those abstractions became the most rigid parts of the system, because every other component had been built around their specific quirks and limitations.
+
+The second major lesson was about composability versus isolation. DeFi's superpower is that protocols can interact with each other permissionlessly, but this composability is also the primary attack vector. We spent months designing our protocol to be a good citizen in the composable ecosystem — accepting arbitrary tokens, integrating with any DEX, supporting flash loans from day one. Then we realized that each integration point was also a vulnerability surface. The eventual architecture uses a layered trust model: a highly restricted core that handles accounting and state transitions, surrounded by adapter modules that manage external interactions with strict validation boundaries.
+
+On the team and process side, the biggest shift was embracing vertical slices over horizontal layers. Instead of building "the smart contract layer" then "the indexer" then "the frontend," we started shipping complete features end-to-end. A single liquidity pool type, fully functional from contract to UI, taught us more about our architecture's strengths and weaknesses than months of building infrastructure in isolation. It also meant we could get real user feedback while the core protocol was still evolving.
+
+If I were starting over, three things would change. First, I'd invest in a comprehensive simulation environment from day one — not just unit tests but agent-based simulations that model real market conditions and adversarial behavior. Second, I'd design the governance system before the protocol mechanics, not after, because governance constraints end up shaping every technical decision. Third, I'd hire a dedicated security engineer as employee number three, not as a consultant brought in before launch. Security thinking needs to be embedded in the architecture from the first commit, not bolted on as a review process.
