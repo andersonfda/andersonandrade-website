@@ -311,7 +311,7 @@ const socials = {
     { name: "YouTube", url: "https://youtube.com/@andersonfda2" },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/in/anderson-andrade-eva",
+      url: "https://linkedin.com/in/andersonfda",
     },
     { name: "X / Twitter", url: "https://x.com/4ndersonandrade" },
     {
