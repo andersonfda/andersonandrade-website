@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal, RevealStagger } from "@/components/reveal";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { SpotlightCard } from "@/components/spotlight-card";
+import { TextMarquee } from "@/components/text-marquee";
+import { AnimatedCounter } from "@/components/animated-counter";
 
 export default function Home() {
   return (
@@ -8,6 +12,11 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <section className="border-y border-border py-6 overflow-hidden">
+          <TextMarquee baseVelocity={-1.5} className="font-extralight tracking-tight text-muted/30">
+            AI Agents &middot; DeFi Protocols &middot; Cybersecurity &middot; Smart Contracts &middot; Autonomous Systems &middot;
+          </TextMarquee>
+        </section>
         <About />
         <Projects />
         <Connect />
@@ -23,7 +32,7 @@ export default function Home() {
 
 function Nav() {
   return (
-    <nav className="nav-animate fixed top-0 left-0 right-0 z-50 bg-bg/80 backdrop-blur-md">
+    <nav className="nav-animate fixed top-0 left-0 right-0 z-50 backdrop-blur-xl nav-bar">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 md:px-10">
         <Link
           href="/"
@@ -44,19 +53,21 @@ function Nav() {
           ))}
         </div>
 
-        <a
-          href="mailto:andersonfda@gmail.com"
-          className="hidden cursor-pointer text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
-        >
-          andersonfda@gmail.com
-        </a>
-
-        <a
-          href="#contact"
-          className="text-[13px] font-normal text-secondary md:hidden"
-        >
-          Contact
-        </a>
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <a
+            href="mailto:andersonfda@gmail.com"
+            className="hidden cursor-pointer text-[13px] font-normal text-secondary transition-colors duration-200 hover:text-primary md:block"
+          >
+            andersonfda@gmail.com
+          </a>
+          <a
+            href="#contact"
+            className="text-[13px] font-normal text-secondary md:hidden"
+          >
+            Contact
+          </a>
+        </div>
       </div>
     </nav>
   );
@@ -66,7 +77,7 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden mesh-gradient">
       {/* Rotated vertical label — left edge */}
       <div
         className="hero-label absolute left-5 top-1/2 z-10 hidden origin-center -translate-y-1/2 lg:block"
@@ -78,27 +89,31 @@ function Hero() {
       </div>
 
       {/* Top-left stats */}
-      <div className="hero-stats absolute left-6 top-24 z-10 flex gap-10 md:left-10 md:top-28 lg:left-20">
+      <div className="hero-stats absolute left-6 top-28 z-10 flex gap-10 md:left-10 md:top-32 lg:left-20">
         <div>
           <p className="text-[40px] font-extralight leading-none text-primary md:text-[56px]">
-            3
+            <span className="gradient-text">
+              <AnimatedCounter target={20} suffix="+" />
+            </span>
           </p>
           <p className="mt-1 text-[11px] font-normal tracking-wide text-secondary">
-            Ventures built
+            Years building Networks
           </p>
         </div>
         <div>
           <p className="text-[40px] font-extralight leading-none text-primary md:text-[56px]">
-            5+
+            <span className="gradient-text">
+              <AnimatedCounter target={5} suffix="+" />
+            </span>
           </p>
           <p className="mt-1 text-[11px] font-normal tracking-wide text-secondary">
-            Years building
+            Years building AI
           </p>
         </div>
       </div>
 
       {/* Bottom-left name + tagline */}
-      <div className="absolute bottom-16 left-6 z-10 max-w-[600px] md:bottom-20 md:left-10 lg:bottom-24 lg:left-20">
+      <div className="absolute bottom-16 left-6 z-10 max-w-[55%] md:bottom-20 md:left-10 lg:bottom-24 lg:left-20">
         <h1
           className="hero-name font-extralight leading-[0.9] tracking-tight text-primary"
           style={{ fontSize: "clamp(80px, 14vw, 180px)" }}
@@ -107,16 +122,16 @@ function Hero() {
           <br />
           Andrade
         </h1>
-        <p className="hero-tagline mt-6 max-w-[460px] text-[15px] font-light leading-relaxed text-secondary md:text-base">
-          &mdash; Building autonomous agent protocols, cybersecurity automation,
-          and decentralized finance systems.
+        <p className="hero-tagline mt-6 max-w-[380px] text-[15px] font-light leading-relaxed text-secondary md:text-base">
+          &mdash; Building autonomous agents, cybersecurity automation
+          &amp; decentralized finance.
         </p>
-        {/* Animated line accent */}
-        <div className="hero-line mt-8 h-px w-24 bg-primary/30" />
+        {/* Animated line accent — now gradient */}
+        <div className="hero-line mt-8 h-px w-24 bg-gradient-to-r from-accent via-accent-purple to-accent-cyan" />
       </div>
 
       {/* Right side portrait — transparent PNG, desaturated */}
-      <div className="hero-photo absolute bottom-0 right-4 h-[75%] w-[35%] max-md:w-[32%] max-sm:hidden md:right-8 lg:right-16">
+      <div className="hero-photo absolute bottom-0 right-4 h-[82%] w-[38%] max-md:w-[35%] max-sm:hidden md:right-8 lg:right-16">
         <Image
           src="/anderson3.png"
           alt="Anderson Andrade"
@@ -126,6 +141,10 @@ function Hero() {
           sizes="(max-width: 640px) 0vw, 35vw"
         />
       </div>
+
+      {/* Subtle floating orb accents */}
+      <div className="absolute top-1/4 right-1/3 h-64 w-64 rounded-full bg-accent/5 blur-3xl animate-float" />
+      <div className="absolute bottom-1/4 left-1/4 h-48 w-48 rounded-full bg-accent-purple/5 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
     </section>
   );
 }
@@ -135,7 +154,7 @@ function Hero() {
 function SectionLabel({ text }: { text: string }) {
   return (
     <div className="mb-10 flex items-center gap-2">
-      <span className="inline-block h-[5px] w-[5px] rounded-full bg-primary" />
+      <span className="inline-block h-[5px] w-[5px] rounded-full bg-accent" />
       <span className="text-[12px] font-normal tracking-wide text-secondary">
         {text}
       </span>
@@ -143,7 +162,34 @@ function SectionLabel({ text }: { text: string }) {
   );
 }
 
-/* ─── About ─── */
+/* ─── About (Bento Grid) ─── */
+
+const expertise = [
+  {
+    label: "Agent Protocols",
+    value: "AI",
+    description: "Autonomous multi-agent systems that orchestrate complex workflows at scale.",
+    icon: "🤖",
+  },
+  {
+    label: "Infrastructure",
+    value: "DeFi",
+    description: "Next-gen on-chain finance with novel liquidity and yield primitives.",
+    icon: "⛓️",
+  },
+  {
+    label: "Security Automation",
+    value: "Cyber",
+    description: "AI-powered defense systems that detect and respond faster than attackers.",
+    icon: "🛡️",
+  },
+  {
+    label: "Decentralized Systems",
+    value: "Web3",
+    description: "Cross-chain interoperability and composable smart contract architectures.",
+    icon: "🌐",
+  },
+];
 
 function About() {
   return (
@@ -153,9 +199,9 @@ function About() {
           <SectionLabel text="About" />
         </Reveal>
 
-        <div className="grid gap-16 lg:grid-cols-[1fr_340px]">
+        <div className="grid gap-12 lg:grid-cols-2">
+          {/* Left: Text content */}
           <div>
-            {/* Portrait — desaturated editorial crop */}
             <Reveal delay={100}>
               <div className="relative mb-12 h-[360px] w-full overflow-hidden rounded-2xl md:h-[420px]">
                 <Image
@@ -165,6 +211,8 @@ function About() {
                   className="photo-editorial object-cover object-[center_15%]"
                   sizes="(max-width: 1024px) 100vw, 700px"
                 />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-bg/60 via-transparent to-transparent" />
               </div>
             </Reveal>
 
@@ -172,7 +220,7 @@ function About() {
               <h2 className="mb-10 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
                 Engineering the future of
                 <br />
-                autonomous systems
+                <span className="gradient-text">autonomous systems</span>
               </h2>
             </Reveal>
 
@@ -187,7 +235,7 @@ function About() {
                 </p>
                 <p>
                   On the decentralized side, I&apos;m building{" "}
-                  <span className="font-medium text-primary">
+                  <span className="font-medium gradient-text">
                     adara.network
                   </span>{" "}
                   &mdash; a DeFi protocol designed for the next generation of
@@ -199,28 +247,30 @@ function About() {
             </Reveal>
           </div>
 
-          <Reveal delay={200}>
-            <div className="flex flex-col gap-4">
-              {[
-                { label: "Agent Protocols", value: "AI" },
-                { label: "Infrastructure", value: "DeFi" },
-                { label: "Security Automation", value: "Cyber" },
-                { label: "Decentralized Systems", value: "Web3" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-center justify-between border-b border-border py-4 transition-colors duration-300 hover:border-primary/30"
-                >
-                  <span className="text-[13px] font-normal text-secondary">
-                    {stat.label}
-                  </span>
-                  <span className="text-[22px] font-light text-primary">
-                    {stat.value}
+          {/* Right: Bento grid */}
+          <RevealStagger className="grid grid-cols-1 sm:grid-cols-2 gap-4" stagger={120}>
+            {expertise.map((item) => (
+              <div
+                key={item.label}
+                className="reveal-item glass-card glow-border rounded-xl p-6 flex flex-col justify-between min-h-[180px]"
+              >
+                <div>
+                  <span className="text-2xl mb-3 block">{item.icon}</span>
+                  <span className="text-[11px] font-normal tracking-wide text-muted uppercase">
+                    {item.label}
                   </span>
                 </div>
-              ))}
-            </div>
-          </Reveal>
+                <div>
+                  <p className="text-[28px] font-light gradient-text mb-2">
+                    {item.value}
+                  </p>
+                  <p className="text-[12px] font-normal leading-relaxed text-secondary">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </RevealStagger>
         </div>
       </div>
     </section>
@@ -236,6 +286,7 @@ const projects = [
     description:
       "End-to-end autonomous content pipeline — from ideation through generation, optimization, and multi-platform distribution. Built on AI agent orchestration for hands-free online presence at scale.",
     tags: ["AI Agents", "Content Systems", "Automation"],
+    gradient: "from-accent/10 to-accent-purple/10",
   },
   {
     number: "02",
@@ -244,6 +295,7 @@ const projects = [
       "A next-generation DeFi protocol engineered for scalable, secure, and composable on-chain finance. Designing novel primitives for liquidity, yield, and cross-chain interoperability.",
     tags: ["DeFi", "Smart Contracts", "Web3"],
     url: "https://adara.network",
+    gradient: "from-accent-purple/10 to-accent-cyan/10",
   },
   {
     number: "03",
@@ -251,6 +303,7 @@ const projects = [
     description:
       "Autonomous defense systems that monitor, detect, and respond to threats in real-time. Leveraging AI to build security infrastructure that adapts faster than attackers.",
     tags: ["Cybersecurity", "AI", "Infrastructure"],
+    gradient: "from-accent-cyan/10 to-accent/10",
   },
 ];
 
@@ -263,13 +316,12 @@ function Projects() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="mb-16 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
-            What I&apos;m building
+            What I&apos;m <span className="gradient-text">building</span>
           </h2>
         </Reveal>
 
-        <RevealStagger className="flex flex-col" stagger={120}>
-          {projects.map((project, i) => {
-            const isLast = i === projects.length - 1;
+        <RevealStagger className="grid gap-6 md:grid-cols-3" stagger={150}>
+          {projects.map((project) => {
             const Wrapper = project.url ? "a" : "div";
             const linkProps = project.url
               ? ({
@@ -280,40 +332,44 @@ function Projects() {
               : {};
 
             return (
-              <Wrapper
+              <SpotlightCard
                 key={project.title}
-                {...linkProps}
-                className={`reveal-item group grid cursor-pointer grid-cols-1 gap-6 border-t border-border py-10 transition-all duration-300 hover:bg-surface/50 hover:pl-4 md:grid-cols-[60px_1fr_1fr] md:items-start md:gap-10 ${isLast ? "border-b" : ""}`}
+                className={`reveal-item glass-card glow-border rounded-2xl bg-gradient-to-br ${project.gradient}`}
+                spotlightColor="rgba(107, 99, 80, 0.12)"
               >
-                <span className="text-[13px] font-normal text-muted transition-colors duration-300 group-hover:text-primary">
-                  {project.number}
-                </span>
+                <Wrapper
+                  {...linkProps}
+                  className="group flex flex-col justify-between min-h-[320px] p-8 cursor-pointer"
+                >
+                  <div>
+                    <span className="text-[13px] font-normal text-muted transition-colors duration-300 group-hover:text-accent">
+                      {project.number}
+                    </span>
+                    <h3 className="mt-4 mb-3 text-[20px] font-normal text-primary md:text-[22px]">
+                      {project.title}
+                      {project.url && (
+                        <span className="ml-2 inline-block text-accent transition-transform duration-300 group-hover:translate-x-1">
+                          &rarr;
+                        </span>
+                      )}
+                    </h3>
+                    <p className="text-[13px] font-normal leading-[1.7] text-secondary">
+                      {project.description}
+                    </p>
+                  </div>
 
-                <div>
-                  <h3 className="mb-2 text-[20px] font-normal text-primary md:text-[22px]">
-                    {project.title}
-                    {project.url && (
-                      <span className="ml-2 inline-block text-secondary transition-transform duration-300 group-hover:translate-x-1">
-                        &rarr;
-                      </span>
-                    )}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="mt-6 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-normal tracking-wide text-muted"
+                        className="rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-[10px] font-normal tracking-wide text-accent"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                </div>
-
-                <p className="text-[14px] font-normal leading-[1.7] text-secondary">
-                  {project.description}
-                </p>
-              </Wrapper>
+                </Wrapper>
+              </SpotlightCard>
             );
           })}
         </RevealStagger>
@@ -324,45 +380,22 @@ function Projects() {
 
 /* ─── Connect (Social Links) ─── */
 
-const socials = {
-  tier1: [
-    { name: "YouTube", url: "https://youtube.com/@andersonfda2" },
-    {
-      name: "LinkedIn",
-      url: "https://linkedin.com/in/andersonfda",
-    },
-    { name: "X / Twitter", url: "https://x.com/4ndersonandrade" },
-    {
-      name: "Instagram",
-      url: "https://instagram.com/andersonandradeeva",
-    },
-    { name: "GitHub", url: "https://github.com/andersonfda" },
-  ],
-  tier2: [
-    { name: "TikTok", url: "https://tiktok.com/@andersonfdaa" },
-    {
-      name: "Facebook",
-      url: "https://facebook.com/anderson.andrade.393",
-    },
-    {
-      name: "Threads",
-      url: "https://threads.net/@andersonandradeeva",
-    },
-  ],
-  tier3: [
-    {
-      name: "Bluesky",
-      url: "https://bsky.app/profile/andersonfda.bsky.social",
-    },
-    { name: "Reddit", url: "https://reddit.com/user/andersonblackbelt" },
-    { name: "Dev.to", url: "https://dev.to/andersonfda" },
-    { name: "Telegram", url: "https://t.me/andersonfdaa" },
-  ],
-};
+const socials = [
+  { name: "YouTube", url: "https://youtube.com/@andersonfda2", slug: "youtube" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/andersonfda", slug: "linkedin" },
+  { name: "X / Twitter", url: "https://x.com/4ndersonandrade", slug: "twitter" },
+  { name: "Instagram", url: "https://instagram.com/andersonandradeeva", slug: "instagram" },
+  { name: "GitHub", url: "https://github.com/andersonfda", slug: "github" },
+  { name: "TikTok", url: "https://tiktok.com/@andersonfdaa", slug: "tiktok" },
+  { name: "Facebook", url: "https://facebook.com/anderson.andrade.393", slug: "facebook" },
+  { name: "Threads", url: "https://threads.net/@andersonandradeeva", slug: "threads" },
+  { name: "Bluesky", url: "https://bsky.app/profile/andersonfda.bsky.social", slug: "bluesky" },
+  { name: "Reddit", url: "https://reddit.com/user/andersonblackbelt", slug: "reddit" },
+  { name: "Dev.to", url: "https://dev.to/andersonfda", slug: "devto" },
+  { name: "Telegram", url: "https://t.me/andersonfdaa", slug: "telegram" },
+];
 
 function Connect() {
-  const allLinks = [...socials.tier1, ...socials.tier2, ...socials.tier3];
-
   return (
     <section id="connect" className="px-6 py-28 md:px-10">
       <div className="mx-auto max-w-[1100px]">
@@ -370,31 +403,27 @@ function Connect() {
           <SectionLabel text="Connect" />
         </Reveal>
         <Reveal delay={100}>
-          <h2 className="mb-16 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
-            Find me online
+          <h2 className="mb-12 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
+            Find me <span className="gradient-text">online</span>
           </h2>
         </Reveal>
 
-        <RevealStagger stagger={50}>
-          {allLinks.map((link, i) => (
-            <div
+        <RevealStagger className="flex flex-col" stagger={30}>
+          {socials.map((link) => (
+            <a
               key={link.name}
-              className={`reveal-item border-t border-border ${i === allLinks.length - 1 ? "border-b" : ""}`}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`reveal-item group flex items-center justify-between border-b border-border py-4 transition-colors duration-300 social-${link.slug}`}
             >
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex cursor-pointer items-center justify-between py-5 transition-all duration-300 hover:bg-surface/50 hover:pl-4"
-              >
-                <span className="text-[16px] font-normal text-primary">
-                  {link.name}
-                </span>
-                <span className="text-[13px] font-normal text-muted transition-colors duration-200 group-hover:text-secondary">
-                  {link.url.replace(/^https?:\/\//, "")}
-                </span>
-              </a>
-            </div>
+              <span className="text-[15px] font-normal text-primary transition-colors duration-300 group-hover:text-inherit">
+                {link.name}
+              </span>
+              <span className="text-[13px] font-normal text-muted transition-colors duration-200 group-hover:text-secondary">
+                &rarr;
+              </span>
+            </a>
           ))}
         </RevealStagger>
       </div>
@@ -409,30 +438,33 @@ function Newsletter() {
     <section className="px-6 py-16 md:px-10">
       <Reveal>
         <div className="mx-auto max-w-[1100px]">
-          <div className="rounded-2xl bg-dark px-8 py-16 text-center md:px-16 md:py-20">
-            <h2 className="mb-3 text-[clamp(28px,4vw,40px)] font-light tracking-tight text-white">
-              Stay in the loop
+          <div className="newsletter-glow rounded-2xl bg-surface border border-border px-8 py-16 text-center md:px-16 md:py-20 relative overflow-hidden">
+            {/* Background gradient orbs */}
+            <div className="absolute top-0 left-1/4 h-40 w-40 rounded-full bg-accent/10 blur-3xl" />
+            <div className="absolute bottom-0 right-1/4 h-40 w-40 rounded-full bg-accent-purple/10 blur-3xl" />
+
+            <h2 className="relative mb-3 text-[clamp(28px,4vw,40px)] font-light tracking-tight text-primary">
+              Stay in the <span className="gradient-text">loop</span>
             </h2>
-            <p className="mb-10 text-[14px] font-normal text-white/50">
+            <p className="relative mb-10 text-[14px] font-normal text-secondary">
               Weekly notes on AI agents, DeFi, and cybersecurity automation.
             </p>
 
-            {/* TODO: Replace with Substack embed URL when handle is set */}
             <form
               action="https://YOUR_SUBSTACK.substack.com/api/v1/free?nojs=true"
               method="POST"
-              className="mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
+              className="relative mx-auto flex max-w-md flex-col gap-3 sm:flex-row"
             >
               <input
                 type="email"
                 name="email"
                 placeholder="your@email.com"
                 required
-                className="flex-1 rounded-lg border border-white/10 bg-white/5 px-5 py-3 text-[14px] font-normal text-white placeholder:text-white/30 transition-border duration-200 focus:border-white/25 focus:outline-none"
+                className="flex-1 rounded-lg border border-border bg-bg/50 px-5 py-3 text-[14px] font-normal text-primary placeholder:text-muted transition-all duration-200 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent/50"
               />
               <button
                 type="submit"
-                className="cursor-pointer rounded-lg bg-white px-8 py-3 text-[13px] font-medium text-dark transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
+                className="cursor-pointer rounded-lg bg-gradient-to-r from-accent via-accent-purple to-accent-cyan px-8 py-3 text-[13px] font-medium text-white transition-all duration-200 hover:opacity-90 active:scale-[0.97]"
               >
                 Subscribe
               </button>
@@ -455,7 +487,7 @@ function Contact() {
         </Reveal>
         <Reveal delay={100}>
           <h2 className="mb-6 text-[clamp(32px,5vw,48px)] font-light leading-[1.1] tracking-tight text-primary">
-            Let&apos;s connect
+            Let&apos;s <span className="gradient-text">connect</span>
           </h2>
         </Reveal>
         <Reveal delay={200}>
@@ -468,7 +500,7 @@ function Contact() {
         <Reveal delay={300}>
           <a
             href="mailto:andersonfda@gmail.com"
-            className="link-underline group inline-flex cursor-pointer items-center gap-2 text-[17px] font-light text-primary transition-colors duration-200 hover:text-secondary"
+            className="link-underline group inline-flex cursor-pointer items-center gap-2 text-[17px] font-light text-accent transition-colors duration-200 hover:text-accent-purple"
           >
             andersonfda@gmail.com
             <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
@@ -485,12 +517,21 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border px-6 py-8 md:px-10">
+    <footer className="group/footer border-t border-border px-6 py-8 md:px-10">
       <div className="mx-auto flex max-w-[1100px] items-center justify-between">
         <p className="text-[12px] font-normal text-muted">
           &copy; {new Date().getFullYear()} Anderson Andrade
         </p>
-        <p className="text-[12px] font-normal text-muted">Built different.</p>
+        <p className="text-[12px] font-normal text-muted">
+          Built <span className="gradient-text">different</span>.
+        </p>
+      </div>
+      {/* Easter egg — reveals on footer hover */}
+      <div className="mx-auto max-w-[1100px] grid grid-rows-[0fr] transition-all duration-500 group-hover/footer:grid-rows-[1fr] group-hover/footer:mt-4">
+        <p className="overflow-hidden text-center text-[11px] font-light italic text-muted opacity-0 transition-opacity duration-500 group-hover/footer:opacity-60">
+          When I&apos;m not building agentic AI automations, you can find me on the mats or racing bikes.
+          The multi-faceted life of a BJJ black belt, engineer &amp; motorcycle enthusiast. 🥋🏍️🤙
+        </p>
       </div>
     </footer>
   );
