@@ -1,0 +1,120 @@
+---
+title: "The AI I Build On Was Just Used in a War. Here's What That Means."
+date: "2026-03-05"
+excerpt: "The Pentagon blacklisted Claude on Friday. Then the military used it to select 1,000+ targets in Iran over the weekend. I run my entire business on this tool. Let me tell you what's actually happening."
+tags: ["AI", "Claude", "Anthropic", "Pentagon", "Iran", "Ethics", "Infrastructure"]
+---
+
+I wrote about the Pentagon blacklisting Claude two days ago. At the time, the story was about Anthropic drawing a line and consumers rewarding them for it. Claude hit #1 on the App Store. Downloads surged. Servers crashed. It felt like a clear narrative — company says no to military, people rally behind them.
+
+Then the weekend happened.
+
+Washington Post, CBS News, Semafor — all reporting the same thing. The U.S. military used Claude to assess intelligence, identify targets, and simulate battle scenarios for strikes on Iran. Over 1,000 targets identified in 24 hours.
+
+The same tool the government labeled a "supply chain risk" on Friday was running military targeting operations by Saturday.
+
+I need to talk about this. Not as a news story. As someone who builds on this tool every single day.
+
+## What we actually know
+
+Let me lay out the sequence, because the timeline matters.
+
+Friday, February 27th. Pentagon tells Anthropic: drop all usage restrictions on Claude. Every guardrail, gone. Anthropic refuses. Two conditions — no mass surveillance on American citizens, no autonomous weapons without a human in the loop. Government responds by designating Claude a supply chain risk and ordering all agencies to stop using it.
+
+Over the weekend, the military uses Claude anyway. Not for autonomous strikes — reportedly for intelligence analysis, target identification, and scenario simulation. The kind of work that used to take teams of analysts days or weeks, done in hours.
+
+Monday morning, reporters start publishing what happened.
+
+Here's the thing that's been rattling around in my head since. Anthropic said no to removing guardrails. The military used Claude anyway — apparently within the guardrails Anthropic insisted on keeping. Human in the loop. No autonomous kill chain. The tool was used for analysis and recommendation, not autonomous action.
+
+That's... complicated.
+
+## Why a network architect sees this differently
+
+I spent 20 years building enterprise infrastructure. Routed traffic for some of the largest networks in Canada. And when I hear "supply chain risk," I don't hear a political soundbite. I hear a very specific technical designation that carries real weight.
+
+In network architecture, labeling something a supply chain risk means you're saying this component could be compromised, unreliable, or under the influence of a hostile actor. It triggers removal procedures. You rip it out. You don't keep running production traffic through a supply chain risk.
+
+But that's exactly what happened here. The government designated Claude as a supply chain risk, told every agency to stop using it, and then — the same weekend — the military used it for one of the most consequential operations in recent memory.
+
+That tells you something. Either the "supply chain risk" label was political theater, or the military's operational needs overrode their own security designation. Neither interpretation is reassuring.
+
+I've seen this pattern before in enterprise environments, honestly. Leadership bans a tool for political or compliance reasons. Engineering keeps using it because nothing else works as well. The ban becomes a fiction everyone maintains on paper while the real work continues underneath.
+
+Except this time it's not a banned SaaS tool in a corporate network. It's AI targeting for airstrikes.
+
+## What Anthropic actually said no to
+
+This part keeps getting lost in the noise. Anthropic didn't refuse to work with the government entirely. They didn't say "Claude can never touch military applications." They said two things:
+
+No mass surveillance on American citizens. No fully autonomous weapons without human oversight.
+
+That's it. Those were the lines.
+
+And based on what's been reported, the military's use of Claude over the weekend actually stayed within those boundaries. Humans were in the loop. Claude was doing analysis and simulation — the kind of cognitive heavy lifting that analysts do, just faster. It wasn't making kill decisions autonomously.
+
+Dario Amodei's statement hit hard: "We believe that crossing those lines is contrary to American values." You can argue about whether he's right. You can't argue that he wasn't clear about where the line was.
+
+## The fallout is real and it's messy
+
+Here's what's happening on the ground right now.
+
+Defense tech companies are dropping Claude. If you're a contractor and your primary AI tool just got labeled a supply chain risk by your biggest customer, you don't have much choice. The revenue pressure is immediate.
+
+900 employees across Google, OpenAI, and Anthropic signed an open letter backing Anthropic's stance. Nine hundred. That's not a fringe group. That's a significant chunk of the people actually building these systems saying "we agree that there should be limits."
+
+Google is reportedly negotiating to bring Gemini onto classified Pentagon systems. The vacuum Claude leaves, someone will fill. That's how infrastructure works. It's how it's always worked. I watched it happen with Huawei networking gear, with Kaspersky security products. When a vendor gets blacklisted, traffic doesn't stop flowing. It just routes through a different provider.
+
+The question is whether the replacement will have the same guardrails.
+
+## What this means for builders like me
+
+I run my entire content automation stack on Claude. Eighteen slash commands, twelve API integrations, a self-critique engine, a discovery system. My publishing pipeline, my brand voice engine, my analytics — all of it. When Anthropic's servers went down for 10 hours from the demand surge, my whole operation went dark.
+
+I'm also building Pincer, a cybersecurity platform. Claude is woven into the architecture.
+
+So yeah. This isn't abstract for me.
+
+And here's where I've landed after sitting with this for a few days.
+
+I'm not switching.
+
+Not because I think Anthropic is perfect. Not because I agree with every decision they've made. Because I've thought about what the alternative looks like, and it's worse.
+
+The alternative is building on tools where there are no lines. Where the provider will do whatever the biggest customer asks, and you — the individual builder, the startup founder, the solo dev — you're just along for the ride. You don't get a say. You don't even get a warning.
+
+Anthropic drew a line and defended it publicly. That cost them government contracts. Defense partnerships. Probably regulatory goodwill for years. And in the same weekend, the military used their tool anyway — within the boundaries Anthropic set.
+
+Think about what that actually means. The guardrails held. The tool was still useful. The humans stayed in the loop. Anthropic's conditions weren't naive idealism. They were a framework that the military could (and apparently did) work within.
+
+## The part that keeps me up at night
+
+But I'm not going to pretend this is a clean story. It's not.
+
+The tool I build on was used to identify over a thousand military targets in 24 hours. People were on the other end of those targets. Real people. I can rationalize the human-in-the-loop safeguard all I want, but the scale and speed of what Claude enabled is something that didn't exist before.
+
+Every builder in AI needs to sit with that discomfort. The tools we're building on — and the tools we're building with them — they have weight now. Real-world, irreversible weight.
+
+When I was racking servers and configuring BGP sessions in data centers, the worst-case scenario for my infrastructure decisions was downtime. Maybe a financial loss. A breach, at worst. The stakes for AI infrastructure are categorically different. The same model that helps me generate LinkedIn posts and debug OAuth flows helped the military plan strikes on a nation of 88 million people.
+
+I don't have a neat conclusion for that. I don't think anyone does yet.
+
+## What I'm doing about it
+
+Practically, three things.
+
+**Diversifying my dependencies.** Not away from Claude — I still think it's the best tool for what I build. But I'm adding fallback paths. Local models for non-critical tasks. Clear documentation of what depends on what, so if Claude goes down again (or gets pulled from the market entirely, which isn't impossible), I'm not dead in the water. Twenty years of network architecture taught me one thing above everything else: redundancy isn't paranoia, it's professionalism.
+
+**Paying closer attention to the companies behind my tools.** Not just their products — their governance, their public commitments, their behavior under pressure. Anthropic just got pressure-tested in a way no AI company has before. They held. That matters. But I'm watching.
+
+**Being honest about what I'm building on.** This post is part of that. I'm not going to pretend the tools I use are neutral utilities like a text editor or a spreadsheet. They're not. They carry the values and the decisions of the people who built them. And now, apparently, they carry the consequences of how governments choose to use them.
+
+## For other builders
+
+If you're building on AI right now — any AI, not just Claude — the era of treating these tools as commodities is over. It ended this weekend.
+
+Your model provider is a strategic dependency. Treat it like one. Know their policies. Understand their red lines (or lack thereof). Have a contingency plan. And think — really think — about what you're building and who might use it in ways you didn't intend.
+
+I chose Claude because the people building it were willing to lose a government contract over principles I agree with. That hasn't changed. What changed is that I now know my tools can go from content automation to military targeting in the same weekend.
+
+That's the world we're building in now. Eyes open.
